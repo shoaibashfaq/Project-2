@@ -1,11 +1,14 @@
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
+const cors = require('cors'); // Import cors package
 const port = 3000;
 const uri = 'mongodb://localhost:27017';
 const dbName = 'swapi';
 
 let db;
+app.use(cors());
+
 
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(client => {
