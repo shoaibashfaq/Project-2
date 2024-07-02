@@ -28,7 +28,7 @@ const Characters = () => {
         <div id="charactersList">
             <h1>Star Wars Universe Lookup</h1>
             {chars && chars.map(character => (
-                <div  key={character.id} onClick={()=>goToChar(character._id)}>{character.name} </div>
+                <div  key={character.id} onClick={()=>goToChar(character.id)}>{character.name} </div>
             ))}
 
         </div>
