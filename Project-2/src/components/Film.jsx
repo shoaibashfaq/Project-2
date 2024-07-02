@@ -5,6 +5,11 @@ import axios from 'axios';
 const Film = () => {
     const [movieData, setFilm] = useState(null);
     const [appCh, setAppCh] = useState([]);
+    const navigate = useNavigate();
+
+    const goToFilm = (id)=>{
+        navigate(`/film/${id}`)
+    }
 
     
     const { id } = useParams();

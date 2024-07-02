@@ -5,13 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 const Character = () => {
     const [character, setCharacter] = useState(null);
-    const [films, setFilms] = useState([]);  // Initialize as an empty array
-    const [planets, setPlanets] = useState([]);  // Initialize as an empty array
+    const [films, setFilms] = useState([]);
+    const [planets, setPlanets] = useState([]);
 
     const navigate = useNavigate();
 
     const goToFilm = (id) => {
         navigate(`/film/${id}`)
+    }
+
+    const goToPlanet = (id) => {
+        navigate(`/planet/${id}`)
     }
 
     const { id } = useParams();
@@ -35,8 +39,18 @@ const Character = () => {
             }
         };
 
+        const fetchPlanet = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/planets/${id}`);
+                setPlanets(response.data[0]);
+            } catch (error) {
+                console.error('Error fetching films data:', error);
+            }
+        };
+
         fetchChar()
-        fetchFilms();
+        fetchFilms()
+        fetchPlanet()
     }, [id]);
 
     if (!character) {
@@ -53,13 +67,12 @@ const Character = () => {
                 <p>Height: {character.height} cm</p>
                 <p>Eye Color: {character.eye_color}</p>
                 <p>Mass: {character.mass} kg</p>
-                <p>Homeworld: {character.homeworld}</p>
                 <p>Birth Year: {character.birth_year}</p>
             </div>
 
             <div>
                 <h1>Films Appeared In</h1>
-                {films.map(film => (
+                {films && films.map(film => (
                     <div key={film._id} onClick={() => goToFilm(film.id)}>
                         <h3>{film.title}</h3>
                         {/* <p><strong>Episode ID:</strong> {film.episode_id}</p>
@@ -73,21 +86,11 @@ const Character = () => {
                 ))}
             </div>
 
+
             <div>
-                {planets.map(planet => (
-                    <div key={planet._id}>
-                        <h2>{planet.name}</h2>
-                        <p><strong>Climate:</strong> {planet.climate}</p>
-                        <p><strong>Diameter:</strong> {planet.diameter}</p>
-                        <p><strong>Gravity:</strong> {planet.gravity}</p>
-                        <p><strong>Orbital Period:</strong> {planet.orbital_period}</p>
-                        <p><strong>Population:</strong> {planet.population}</p>
-                        <p><strong>Rotation Period:</strong> {planet.rotation_period}</p>
-                        <p><strong>Surface Water:</strong> {planet.surface_water}</p>
-                        <p><strong>Terrain:</strong> {planet.terrain}</p>
-                        <hr />
-                    </div>
-                ))}
+                <h1>Planet</h1>
+                <h3 onClick={() => goToPlanet(planets.id)}>Homeworld: {planets.name} </h3>
+
             </div>
         </>
     );
