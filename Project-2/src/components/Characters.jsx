@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 const Characters = () => {
     const [chars, setChars] = useState();
+    const navigate = useNavigate();
+
+    const goToChar = (id)=>{
+        navigate(`/user/${id}`)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +28,7 @@ const Characters = () => {
         <div>
             <h1>Characters</h1>
             {chars && chars.map(character => (
-                <button key={character.id}>{character.name} </button>
+                <div key={character.id} onClick={()=>goToChar(character._id)}>{character.name} </div>
             ))}
 
         </div>
