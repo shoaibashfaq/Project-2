@@ -8,7 +8,7 @@ const dbName = 'swapi';
 
 let db;
 app.use(cors());
-
+app.use(express.static('./public'))
 
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(client => {
