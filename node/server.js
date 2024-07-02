@@ -47,41 +47,76 @@ app.get('/api/characters/:id', async (req, res) => {
 });
 
 app.get('/api/films/:id', async (req, res) => {
-    const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
-    res.json(film);
+    try {
+        const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
+        res.json(film);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/planets/:id', async (req, res) => {
-    const planet = await db.collection('planets').findOne({ _id: ObjectId(req.params.id) });
-    res.json(planet);
+    try {
+        const planet = await db.collection('planets').findOne({ _id: ObjectId(req.params.id) });
+        res.json(planet);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/films/:id/characters', async (req, res) => {
-    const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
-    const characters = await db.collection('characters').find({ _id: { $in: film.characterIds } }).toArray();
-    res.json(characters);
+    try {
+        const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
+        const characters = await db.collection('characters').find({ _id: { $in: film.characterIds } }).toArray();
+        res.json(characters);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/films/:id/planets', async (req, res) => {
-    const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
-    const planets = await db.collection('planets').find({ _id: { $in: film.planetIds } }).toArray();
-    res.json(planets);
+    try {
+        const film = await db.collection('films').findOne({ _id: new ObjectId(req.params.id) });
+        const planets = await db.collection('planets').find({ _id: { $in: film.planetIds } }).toArray();
+        res.json(planets);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/characters/:id/films', async (req, res) => {
-    const character = await db.collection('characters').findOne({ _id: new ObjectId(req.params.id) });
-    const films = await db.collection('films').find({ characterIds: character._id }).toArray();
-    res.json(films);
+    try {
+        const character = await db.collection('characters').findOne({ _id: new ObjectId(req.params.id) });
+        const films = await db.collection('films').find({ characterIds: character._id }).toArray();
+        res.json(films);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/planets/:id/films', async (req, res) => {
-    const planet = await db.collection('planets').findOne({ _id: new ObjectId(req.params.id) });
-    const films = await db.collection('films').find({ planetIds: planet._id }).toArray();
-    res.json(films);
+    try {
+        const planet = await db.collection('planets').findOne({ _id: new ObjectId(req.params.id) });
+        const films = await db.collection('films').find({ planetIds: planet._id }).toArray();
+        res.json(films);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
 
 app.get('/api/planets/:id/characters', async (req, res) => {
-    const planet = await db.collection('planets').findOne({ _id: new ObjectId(req.params.id) });
-    const characters = await db.collection('characters').find({ planetIds: planet._id }).toArray();
-    res.json(characters);
+    try {
+        const planet = await db.collection('planets').findOne({ _id: new ObjectId(req.params.id) });
+        const characters = await db.collection('characters').find({ planetIds: planet._id }).toArray();
+        res.json(characters);
+    } catch (error) {
+        console.log("There was an error")
+        res.status(400).send("There was an error")
+    }
 });
