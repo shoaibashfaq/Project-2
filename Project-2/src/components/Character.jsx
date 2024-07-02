@@ -24,9 +24,9 @@ const Character = () => {
     }
 
     return (
-        <div>
+        <div id="generalInfo">
             <h1 key={character.id}>{character.name}</h1>
-            <p>Gender: {character.gender}</p>
+            <p >Gender: {character.gender}</p>
             <p>Skin Color: {character.skin_color}</p>
             <p>Hair Color: {character.hair_color}</p>
             <p>Height: {character.height} cm</p>
